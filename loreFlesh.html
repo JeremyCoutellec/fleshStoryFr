@@ -1,0 +1,1177 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Explorez l'univers enrichi de Flesh and Blood à travers les récits légendaires des héros de Rathe : Rhinar, Katsu, Bravo, Dorinthea, Dash, et Azalea."
+    />
+    <title>Flesh and Blood - Chroniques de Rathe</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Outfit:wght@300;400;500;600;700&family=Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* Reset & Variables */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --bg-color: #080a0f;
+        --container-bg: rgba(13, 17, 26, 0.75);
+        --card-bg: rgba(18, 22, 33, 0.9);
+        --border-color: rgba(255, 255, 255, 0.08);
+
+        --text-primary: #f3f4f6;
+        --text-secondary: #9ca3af;
+        --text-muted: #6b7280;
+
+        --rhinar-color: #ef4444;
+        --rhinar-glow: rgba(239, 68, 68, 0.12);
+
+        --katsu-color: #8b5cf6;
+        --katsu-glow: rgba(139, 92, 246, 0.12);
+
+        --bravo-color: #f59e0b;
+        --bravo-glow: rgba(245, 158, 11, 0.12);
+
+        --dorinthea-color: #eab308;
+        --dorinthea-glow: rgba(234, 179, 8, 0.12);
+
+        --dash-color: #06b6d4;
+        --dash-glow: rgba(6, 182, 212, 0.12);
+
+        --azalea-color: #10b981;
+        --azalea-glow: rgba(16, 185, 129, 0.12);
+
+        --transition-smooth: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: 'Outfit', sans-serif;
+        background-color: var(--bg-color);
+        background-image:
+          radial-gradient(circle at 10% 20%, rgba(239, 68, 68, 0.04) 0%, transparent 40%),
+          radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.04) 0%, transparent 40%),
+          radial-gradient(circle at 50% 50%, rgba(245, 158, 11, 0.03) 0%, transparent 60%);
+        background-attachment: fixed;
+        color: var(--text-primary);
+        line-height: 1.6;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* Ambient Glows */
+      .ambient-light {
+        position: fixed;
+        width: 500px;
+        height: 500px;
+        border-radius: 50%;
+        pointer-events: none;
+        filter: blur(120px);
+        z-index: -1;
+        opacity: 0.12;
+        transition: var(--transition-smooth);
+      }
+
+      #glow-left {
+        top: -100px;
+        left: -100px;
+        background: var(--rhinar-color);
+      }
+
+      #glow-right {
+        bottom: -100px;
+        right: -100px;
+        background: var(--katsu-color);
+      }
+
+      /* Typography */
+      h1,
+      h2,
+      h3 {
+        font-family: 'Cinzel', serif;
+        letter-spacing: 0.05em;
+      }
+
+      p {
+        font-family: 'Literata', serif;
+        font-size: 1.05rem;
+        font-weight: 300;
+        color: var(--text-secondary);
+      }
+
+      .wrapper {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem 1.5rem;
+      }
+
+      /* Header */
+      header {
+        text-align: center;
+        margin-bottom: 3rem;
+        padding: 3rem 1rem 2rem 1rem;
+        border-bottom: 1px solid var(--border-color);
+        background: linear-gradient(180deg, rgba(8, 10, 15, 0.8) 0%, rgba(8, 10, 15, 0) 100%);
+      }
+
+      header h1 {
+        font-size: 2.6rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        background: linear-gradient(135deg, #ffffff 40%, #a1a1aa 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 0.5rem;
+      }
+
+      header .subtitle {
+        font-size: 1rem;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        font-weight: 600;
+      }
+
+      /* Nav Tabs Filter */
+      .nav-tabs {
+        display: flex;
+        justify-content: center;
+        gap: 0.6rem;
+        margin-bottom: 3.5rem;
+        flex-wrap: wrap;
+      }
+
+      .tab-btn {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        color: var(--text-secondary);
+        padding: 0.7rem 1.4rem;
+        font-family: 'Outfit', sans-serif;
+        font-size: 0.85rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: var(--transition-smooth);
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        backdrop-filter: blur(8px);
+      }
+
+      .tab-btn::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: var(--text-primary);
+        transform: scaleX(0);
+        transition: var(--transition-smooth);
+        transform-origin: right;
+      }
+
+      .tab-btn:hover {
+        color: var(--text-primary);
+        border-color: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+      }
+
+      .tab-btn.active {
+        color: var(--text-primary);
+        border-color: rgba(255, 255, 255, 0.25);
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      .tab-btn.active::before {
+        transform: scaleX(1);
+        transform-origin: left;
+      }
+
+      /* Individual Active State Accents */
+      .tab-btn[data-hero='rhinar'].active::before {
+        background: var(--rhinar-color);
+      }
+      .tab-btn[data-hero='katsu'].active::before {
+        background: var(--katsu-color);
+      }
+      .tab-btn[data-hero='bravo'].active::before {
+        background: var(--bravo-color);
+      }
+      .tab-btn[data-hero='dorinthea'].active::before {
+        background: var(--dorinthea-color);
+      }
+      .tab-btn[data-hero='dash'].active::before {
+        background: var(--dash-color);
+      }
+      .tab-btn[data-hero='azalea'].active::before {
+        background: var(--azalea-color);
+      }
+
+      .tab-btn[data-hero='rhinar'] .tab-indicator {
+        background: var(--rhinar-color);
+      }
+      .tab-btn[data-hero='katsu'] .tab-indicator {
+        background: var(--katsu-color);
+      }
+      .tab-btn[data-hero='bravo'] .tab-indicator {
+        background: var(--bravo-color);
+      }
+      .tab-btn[data-hero='dorinthea'] .tab-indicator {
+        background: var(--dorinthea-color);
+      }
+      .tab-btn[data-hero='dash'] .tab-indicator {
+        background: var(--dash-color);
+      }
+      .tab-btn[data-hero='azalea'] .tab-indicator {
+        background: var(--azalea-color);
+      }
+
+      .tab-indicator {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        display: inline-block;
+        background: var(--text-secondary);
+      }
+
+      /* Content Container */
+      .lore-container {
+        display: flex;
+        flex-direction: column;
+        gap: 5rem;
+      }
+
+      .hero-section {
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 3.5rem;
+        align-items: center;
+        padding: 2.5rem;
+        background: var(--container-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 10px;
+        backdrop-filter: blur(10px);
+        position: relative;
+        overflow: hidden;
+        transition:
+          opacity 0.4s ease,
+          transform 0.4s ease;
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .hero-section.hidden {
+        display: none;
+        opacity: 0;
+        transform: translateY(15px);
+      }
+
+      /* Alternating grids */
+      .hero-section:nth-child(even) {
+        grid-template-columns: 0.85fr 1.15fr;
+      }
+
+      .hero-section:nth-child(even) .hero-info {
+        order: 2;
+      }
+
+      .hero-section:nth-child(even) .hero-media {
+        order: 1;
+      }
+
+      /* Hero Accents */
+      .hero-section.rhinar {
+        box-shadow: 0 10px 30px -10px var(--rhinar-glow);
+        border-top: 4px solid var(--rhinar-color);
+      }
+      .hero-section.katsu {
+        box-shadow: 0 10px 30px -10px var(--katsu-glow);
+        border-top: 4px solid var(--katsu-color);
+      }
+      .hero-section.bravo {
+        box-shadow: 0 10px 30px -10px var(--bravo-glow);
+        border-top: 4px solid var(--bravo-color);
+      }
+      .hero-section.dorinthea {
+        box-shadow: 0 10px 30px -10px var(--dorinthea-glow);
+        border-top: 4px solid var(--dorinthea-color);
+      }
+      .hero-section.dash {
+        box-shadow: 0 10px 30px -10px var(--dash-glow);
+        border-top: 4px solid var(--dash-color);
+      }
+      .hero-section.azalea {
+        box-shadow: 0 10px 30px -10px var(--azalea-glow);
+        border-top: 4px solid var(--azalea-color);
+      }
+
+      .hero-info {
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+        z-index: 1;
+      }
+
+      .badge-group {
+        display: flex;
+        gap: 0.6rem;
+        flex-wrap: wrap;
+      }
+
+      .badge {
+        font-size: 0.7rem;
+        font-weight: 700;
+        padding: 0.25rem 0.7rem;
+        border-radius: 9999px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        color: var(--text-secondary);
+      }
+
+      .rhinar .badge.primary {
+        background: rgba(239, 68, 68, 0.12);
+        color: var(--rhinar-color);
+        border-color: rgba(239, 68, 68, 0.25);
+      }
+      .katsu .badge.primary {
+        background: rgba(139, 92, 246, 0.12);
+        color: var(--katsu-color);
+        border-color: rgba(139, 92, 246, 0.25);
+      }
+      .bravo .badge.primary {
+        background: rgba(245, 158, 11, 0.12);
+        color: var(--bravo-color);
+        border-color: rgba(245, 158, 11, 0.25);
+      }
+      .dorinthea .badge.primary {
+        background: rgba(234, 179, 8, 0.12);
+        color: var(--dorinthea-color);
+        border-color: rgba(234, 179, 8, 0.25);
+      }
+      .dash .badge.primary {
+        background: rgba(6, 182, 212, 0.12);
+        color: var(--dash-color);
+        border-color: rgba(6, 182, 212, 0.25);
+      }
+      .azalea .badge.primary {
+        background: rgba(16, 185, 129, 0.12);
+        color: var(--azalea-color);
+        border-color: rgba(16, 185, 129, 0.25);
+      }
+
+      .hero-name {
+        font-size: 2.2rem;
+        font-weight: 900;
+        color: #ffffff;
+        line-height: 1.1;
+      }
+
+      .story-link {
+        font-family: 'Cinzel', serif;
+        font-size: 1.05rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        transition: var(--transition-smooth);
+      }
+
+      .rhinar .story-link {
+        color: var(--rhinar-color);
+      }
+      .katsu .story-link {
+        color: var(--katsu-color);
+      }
+      .bravo .story-link {
+        color: var(--bravo-color);
+      }
+      .dorinthea .story-link {
+        color: var(--dorinthea-color);
+      }
+      .dash .story-link {
+        color: var(--dash-color);
+      }
+      .azalea .story-link {
+        color: var(--azalea-color);
+      }
+
+      .story-link:hover {
+        opacity: 0.8;
+        transform: translateX(3px);
+      }
+
+      .story-link::after {
+        content: ' →';
+        font-family: sans-serif;
+        font-weight: bold;
+      }
+
+      .hero-description {
+        position: relative;
+        padding-left: 1.2rem;
+        border-left: 2px solid var(--border-color);
+      }
+
+      .rhinar .hero-description {
+        border-left-color: var(--rhinar-color);
+      }
+      .katsu .hero-description {
+        border-left-color: var(--katsu-color);
+      }
+      .bravo .hero-description {
+        border-left-color: var(--bravo-color);
+      }
+      .dorinthea .hero-description {
+        border-left-color: var(--dorinthea-color);
+      }
+      .dash .hero-description {
+        border-left-color: var(--dash-color);
+      }
+      .azalea .hero-description {
+        border-left-color: var(--azalea-color);
+      }
+
+      .story-content {
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+      }
+
+      .story-paragraph {
+        margin-bottom: 0.5rem;
+        text-align: justify;
+        font-size: 0.98rem;
+      }
+
+      /* Synthesis Box */
+      .synthesis-card {
+        margin-top: 1.2rem;
+        padding: 1.2rem;
+        border-radius: 6px;
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.04);
+        position: relative;
+      }
+
+      .synthesis-card::before {
+        content: 'SYNTHÈSE';
+        position: absolute;
+        top: -9px;
+        left: 12px;
+        font-size: 0.6rem;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        padding: 0.1rem 0.4rem;
+        background: var(--bg-color);
+        border-radius: 4px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .rhinar .synthesis-card::before {
+        color: var(--rhinar-color);
+        border-color: rgba(239, 68, 68, 0.2);
+      }
+      .katsu .synthesis-card::before {
+        color: var(--katsu-color);
+        border-color: rgba(139, 92, 246, 0.2);
+      }
+      .bravo .synthesis-card::before {
+        color: var(--bravo-color);
+        border-color: rgba(245, 158, 11, 0.2);
+      }
+      .dorinthea .synthesis-card::before {
+        color: var(--dorinthea-color);
+        border-color: rgba(234, 179, 8, 0.2);
+      }
+      .dash .synthesis-card::before {
+        color: var(--dash-color);
+        border-color: rgba(6, 182, 212, 0.2);
+      }
+      .azalea .synthesis-card::before {
+        color: var(--azalea-color);
+        border-color: rgba(16, 185, 129, 0.2);
+      }
+
+      .synthesis-card p {
+        font-style: italic;
+        font-size: 0.95rem;
+        line-height: 1.5;
+        color: var(--text-primary);
+      }
+
+      /* Media */
+      .hero-media {
+        position: relative;
+        width: 100%;
+        height: 440px;
+        border-radius: 6px;
+        overflow: hidden;
+        border: 1px solid var(--border-color);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+      }
+
+      .hero-media img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        transition: var(--transition-smooth);
+        filter: grayscale(10%) contrast(102%);
+      }
+
+      .hero-section:hover .hero-media img {
+        transform: scale(1.02);
+        filter: grayscale(0%) contrast(100%);
+      }
+
+      .media-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(180deg, rgba(8, 10, 15, 0) 65%, rgba(8, 10, 15, 0.75) 100%);
+        pointer-events: none;
+      }
+
+      .accent-frame {
+        position: absolute;
+        top: 12px;
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        pointer-events: none;
+        transition: var(--transition-smooth);
+      }
+
+      .rhinar:hover .accent-frame {
+        border-color: rgba(239, 68, 68, 0.35);
+      }
+      .katsu:hover .accent-frame {
+        border-color: rgba(139, 92, 246, 0.35);
+      }
+      .bravo:hover .accent-frame {
+        border-color: rgba(245, 158, 11, 0.35);
+      }
+      .dorinthea:hover .accent-frame {
+        border-color: rgba(234, 179, 8, 0.35);
+      }
+      .dash:hover .accent-frame {
+        border-color: rgba(6, 182, 212, 0.35);
+      }
+      .azalea:hover .accent-frame {
+        border-color: rgba(16, 185, 129, 0.35);
+      }
+
+      /* Scroll Progress */
+      .progress-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        z-index: 100;
+      }
+
+      .progress-bar {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(
+          to right,
+          var(--rhinar-color),
+          var(--katsu-color),
+          var(--bravo-color),
+          var(--dorinthea-color),
+          var(--dash-color),
+          var(--azalea-color)
+        );
+        transition: width 0.1s ease;
+      }
+
+      /* Footer */
+      footer {
+        margin-top: 6rem;
+        padding: 2.5rem 1rem;
+        border-top: 1px solid var(--border-color);
+        text-align: center;
+        color: var(--text-muted);
+      }
+
+      footer p {
+        font-family: 'Outfit', sans-serif;
+        font-size: 0.85rem;
+      }
+
+      /* Responsive */
+      @media (max-width: 1024px) {
+        .hero-section {
+          grid-template-columns: 1fr !important;
+          gap: 2.5rem;
+          padding: 2rem;
+        }
+
+        .hero-section .hero-info,
+        .hero-section .hero-media {
+          order: 1 !important;
+        }
+
+        .hero-section .hero-media {
+          order: 2 !important;
+          height: 380px;
+        }
+
+        header h1 {
+          font-size: 2.1rem;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .wrapper {
+          padding: 1rem;
+        }
+
+        header {
+          padding: 1.5rem 1rem;
+          margin-bottom: 1.5rem;
+        }
+
+        .nav-tabs {
+          gap: 0.4rem;
+          margin-bottom: 2rem;
+        }
+
+        .tab-btn {
+          padding: 0.5rem 1rem;
+          font-size: 0.78rem;
+        }
+
+        .hero-section {
+          padding: 1.2rem;
+          gap: 1.5rem;
+        }
+
+        .hero-name {
+          font-size: 1.65rem;
+        }
+
+        .hero-media {
+          height: 280px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Scroll Progress -->
+    <div class="progress-container">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Ambient Lights -->
+    <div class="ambient-light" id="glow-left"></div>
+    <div class="ambient-light" id="glow-right"></div>
+
+    <div class="wrapper">
+      <!-- Site Header -->
+      <header>
+        <h1>Chroniques de Rathe</h1>
+        <div class="subtitle text-center">Récits Originaux & Lore des Héros</div>
+      </header>
+
+      <!-- Dynamic Filter Tabs -->
+      <nav class="nav-tabs" aria-label="Filtres des héros">
+        <button class="tab-btn active" data-hero="all" id="btn-all">
+          <span class="tab-indicator"></span>Tous les Héros
+        </button>
+        <button class="tab-btn" data-hero="rhinar" id="btn-rhinar"><span class="tab-indicator"></span>Rhinar</button>
+        <button class="tab-btn" data-hero="katsu" id="btn-katsu"><span class="tab-indicator"></span>Katsu</button>
+        <button class="tab-btn" data-hero="bravo" id="btn-bravo"><span class="tab-indicator"></span>Bravo</button>
+        <button class="tab-btn" data-hero="dorinthea" id="btn-dorinthea">
+          <span class="tab-indicator"></span>Dorinthea
+        </button>
+        <button class="tab-btn" data-hero="dash" id="btn-dash"><span class="tab-indicator"></span>Dash</button>
+        <button class="tab-btn" data-hero="azalea" id="btn-azalea"><span class="tab-indicator"></span>Azalea</button>
+      </nav>
+
+      <!-- Lore Content -->
+      <main class="lore-container">
+        <!-- RHINAR -->
+        <section class="hero-section rhinar" id="section-rhinar" data-category="rhinar">
+          <div class="hero-info">
+            <div class="badge-group">
+              <span class="badge primary">Savage Lands</span>
+              <span class="badge">Brute</span>
+              <span class="badge">Apex Predator</span>
+            </div>
+            <h2 class="hero-name">Rhinar</h2>
+            <a
+              href="https://fabtcg.com/stories/kill-or-be-killed/"
+              target="_blank"
+              rel="noopener"
+              class="story-link"
+              title="Lire l'histoire originale sur le site officiel"
+            >
+              Kill or Be Killed
+            </a>
+
+            <div class="hero-description story-content">
+              <p class="story-paragraph">
+                La page « Kill or Be Killed » raconte l’origine de Rhinar, une Brute des Savage Lands, une jungle
+                primordiale extrêmement hostile où chaque créature doit se battre pour survivre. Dès l’introduction, le
+                décor est clair : cette région est un écosystème brutal, sans carte connue, peuplé de prédateurs, de
+                charognards et de bêtes gigantesques. Même les humains qui s’aventurent dans la jungle deviennent des
+                intrus menacés.
+              </p>
+              <p class="story-paragraph">
+                Rhinar apparaît d’abord comme un jeune brute vulnérable, presque sans défense. À peine sorti de son
+                terrier, il manque d’être tué par des prédateurs, mais survit grâce à ses dents et à son instinct. Cette
+                première scène pose le principe central de son histoire : dans les Savage Lands, il n’existe pas de
+                pitié, seulement la règle tuer ou être tué.
+              </p>
+              <p class="story-paragraph">
+                En grandissant, Rhinar appréhende la survie dans un environnement où toute faiblesse équivaut à la mort.
+                Il est chassé, affamé, mais fortifie son corps et son esprit à force de combats et de blessures. Il
+                cesse progressivement d’être une proie facile et commence à s'imposer en tant que féroce prédateur.
+              </p>
+              <p class="story-paragraph">
+                Plus tard, il s’éloigne du nid et explore les zones septentrionales des Savage Lands. Sur d'anciens
+                champs de bataille, il récupère du métal, des os et des peaux pour se fabriquer des protections de
+                fortune ainsi qu'une massive massue hérissée de pointes, prolongeant sa violence brute par des outils
+                destructeurs.
+              </p>
+              <p class="story-paragraph">
+                Il s'approprie un vaste territoire et y élimine avec une férocité sans limites les animaux et intrus
+                nuisibles à son domaine. Sa soif de chair et de confrontation fait fuir et disparaître toute vie
+                résidente au sein de ses frontières territoriales.
+              </p>
+              <p class="story-paragraph">
+                L'histoire culmine lorsqu'un groupe d'envahisseurs lourdement armés de plaques d'argent et d’or
+                l'encercle. Grièvement blessé, Rhinar déchaîne sa rage primitive, la mystérieuse rage de sang
+                (bloodrage), entrant dans un état de frénésie destructrice qui condamne méthodiquement tous ses
+                assaillants.
+              </p>
+            </div>
+
+            <div class="synthesis-card">
+              <p>
+                Cette histoire présente Rhinar comme le produit direct des Savage Lands. Ce n’est pas un héros moral
+                mais un survivant absolu. Son identité repose sur l’instinct territorial, la brutalité mécanique et la
+                terreur physique, achevant sa métamorphose en prédateur dominant craint de toutes les bêtes sauvages.
+              </p>
+            </div>
+          </div>
+
+          <div class="hero-media">
+            <img src="assets/killOrBeKilled.png" alt="Illustration Rhinar - Kill or Be Killed" loading="lazy" />
+            <div class="media-overlay"></div>
+            <div class="accent-frame"></div>
+          </div>
+        </section>
+
+        <!-- KATSU -->
+        <section class="hero-section katsu" id="section-katsu" data-category="katsu">
+          <div class="hero-info">
+            <div class="badge-group">
+              <span class="badge primary">Misteria</span>
+              <span class="badge">Ninja</span>
+              <span class="badge">Master Mugenshi</span>
+            </div>
+            <h2 class="hero-name">Katsu</h2>
+            <a
+              href="https://fabtcg.com/stories/wanderings-in-the-mist/"
+              target="_blank"
+              rel="noopener"
+              class="story-link"
+              title="Lire l'histoire originale sur le site officiel"
+            >
+              Wanderings in the Mist
+            </a>
+
+            <div class="hero-description story-content">
+              <p class="story-paragraph">
+                La page « Wanderings in the Mist » relate un chapitre majeur de l’existence de Katsu, jeune prodige et
+                futur chef du clan reclus Mugenshi. Etabli au creux des brumes hivernales de Misteria, son clan subit
+                depuis des siècles l'effet d'une affliction dégénérative incurable, le Seikan, qui décime
+                silencieusement sa population. Katsu milite pour franchir les frontières du clan en quête d'un
+                traitement salvateur, heurtant le refus des grands maîtres, soucieux de conserver leur isolement
+                protecteur.
+              </p>
+              <p class="story-paragraph">
+                Après des années d’échecs diplomatiques, Katsu s'enfuit nuitamment avec de maigres provisions, renouant
+                avec son esprit nomade. Rapidement, il croise le chemin d'éclaireurs silencieux affiliés à une faction
+                mystique, « Aui’s Scales », menant à un duel technique dans lequel Katsu déploie sa vivacité athlétique.
+              </p>
+              <p class="story-paragraph">
+                Il est épaulé par les Crimson Haze, un groupement rebelle en lutte ouverte contre Aui’s Scales. Ils lui
+                révèlent l'existence de coffres cachés détenant des indices ou de possibles remèdes dans un bastion
+                fortifié ennemi. Convaincu, Katsu accepte cette alliance temporaire d'infiltration.
+              </p>
+              <p class="story-paragraph">
+                Au cœur du bastion, Katsu met la main sur six mystérieux parchemins. Après plusieurs joutes où il
+                manipule avec génie des bourrasques de vent, il s'aperçoit que les Crimson Haze l'utilisent comme
+                diversion pour décimer sans distinction les occupants du complexe. Voulant préserver les textes sacrés
+                de leurs mains destructrices, Katsu s'oppose à eux.
+              </p>
+              <p class="story-paragraph">
+                Alors que la confrontation s'envenime, quatre grands maîtres Mugenshi restés sur sa piste font
+                irruption. Validant son intuition et sa bravoure, ils actent la fin du secret de leur clan et décident
+                de s'allier à l'exilé pour décrypter les parchemins et amorcer ensemble la chasse aux artefacts décrits.
+              </p>
+            </div>
+
+            <div class="synthesis-card">
+              <p>
+                Le récit signe la bascule de Katsu d'une fuite indisciplinée vers une quête reconnue par ses pairs.
+                L'histoire explore la tension entre confinement protecteur traditionnel et l'obligation morale d'agir
+                face à une lente agonie.
+              </p>
+            </div>
+          </div>
+
+          <div class="hero-media">
+            <img
+              src="assets/wanderingsInTheMist.png"
+              alt="Illustration Katsu - Wanderings in the Mist"
+              loading="lazy"
+            />
+            <div class="media-overlay"></div>
+            <div class="accent-frame"></div>
+          </div>
+        </section>
+
+        <!-- BRAVO -->
+        <section class="hero-section bravo" id="section-bravo" data-category="bravo">
+          <div class="hero-info">
+            <div class="badge-group">
+              <span class="badge primary">Aria</span>
+              <span class="badge">Guardian</span>
+              <span class="badge">Showman</span>
+            </div>
+            <h2 class="hero-name">Bravo</h2>
+            <a
+              href="https://fabtcg.com/stories/a-rising-star/"
+              target="_blank"
+              rel="noopener"
+              class="story-link"
+              title="Lire l'histoire originale sur le site officiel"
+            >
+              A Rising Star
+            </a>
+
+            <div class="hero-description story-content">
+              <p class="story-paragraph">
+                La page « A Rising Star » dresse le tableau des premiers exploits de Bravo aux commandes du Everfest
+                Carnival dans la contrée magique d'Aria. Protégée par des barrières physiques, Aria vit au rythme du
+                Flux (Flow) d'énergie magique, aujourd’hui menacé par une instabilité latente et des intrusions
+                étrangères.
+              </p>
+              <p class="story-paragraph">
+                Elevé sous le chapiteau au milieu des acrobates et des conteurs, Bravo se passionne très jeune pour les
+                récits oubliés des anciens défenseurs d'Aria. À sa majorité, il monte le « Legendarium », une revue de
+                théâtre dont il est le héros éclatant grâce à sa carrure fantastique et son tonitruant charisme.
+              </p>
+              <p class="story-paragraph">
+                La comédie s’arrête lorsque Gawain et Morgan, deux artistes de son cercle, quittent le carnaval pour
+                explorer une faille surnaturelle, la Fractal Scar. Rêvant de vivre des aventures dignes des héros qu’il
+                incarne sur scène, Bravo s'empare de son légendaire marteau Anothos et part dans leur sillage.
+              </p>
+              <p class="story-paragraph">
+                Chemin faisant, le trio traverse une Aria méconnaissable et dévastée, abandonnée par ses habitants. Des
+                monstres difformes et putrides, les Dregs, émergent de crevasses pour assaillir les campements civils,
+                poussant Bravo et sa troupe à organiser la résistance aux côtés des rangers et protecteurs locaux.
+              </p>
+              <p class="story-paragraph">
+                Après des mois de guerre harassante face aux hordes bestiales de Dregs, Bravo, acculé et blessé,
+                canalise involontairement le Flux magique à travers Anothos. Son marteau s’illumine d'une aura irisée
+                spectaculaire, annihilant ses assaillants d'une force sismique extraordinaire et sauvant les rescapés
+                d'une mort certaine.
+              </p>
+            </div>
+
+            <div class="synthesis-card">
+              <p>
+                Cette fable accompagne la transformation de Bravo, saltimbanque et comédien flamboyant, en un véritable
+                rempart physique et protecteur magique face à la ruine d'Aria. Sa force cesse d'être théâtrale pour
+                devenir le renouveau annoncé des mythiques protecteurs Gardiens.
+              </p>
+            </div>
+          </div>
+
+          <div class="hero-media">
+            <img src="assets/aRisingStar.png" alt="Illustration Bravo - A Rising Star" loading="lazy" />
+            <div class="media-overlay"></div>
+            <div class="accent-frame"></div>
+          </div>
+        </section>
+
+        <!-- DORINTHEA -->
+        <section class="hero-section dorinthea" id="section-dorinthea" data-category="dorinthea">
+          <div class="hero-info">
+            <div class="badge-group">
+              <span class="badge primary">Solana</span>
+              <span class="badge">Warrior</span>
+              <span class="badge">Hand of Sol</span>
+            </div>
+            <h2 class="hero-name">Dorinthea</h2>
+            <a
+              href="https://fabtcg.com/stories/pride-of-the-ironsongs/"
+              target="_blank"
+              rel="noopener"
+              class="story-link"
+              title="Lire l'histoire originale sur le site officiel"
+            >
+              Pride of the Ironsongs
+            </a>
+
+            <div class="hero-description story-content">
+              <p class="story-paragraph">
+                La page « Pride of the Ironsongs » relate la jeunesse et l'affirmation de Dorinthea Ironsong, née dans
+                la prestigieuse lignée de forgerons de la cité sainte de Solana. Rêveuse et intrépide, la jeune fille
+                passe ses journées dans l'atelier familial, observant avec admiration ses parents fondre et marteler le
+                métal béni par le soleil pour fabriquer des armes exceptionnelles.
+              </p>
+              <p class="story-paragraph">
+                Inspirée par la vaillance des protecteurs de Solana, elle s'enrôle dans la milice de la Main de Sol.
+                Cependant, son impétuosité et son manque d'expérience provoquent une terrible catastrophe : au cours
+                d’une de ses premières missions de reconnaissance, elle ignore les consignes de sécurité, entraînant son
+                escouade dans une embuscade fatale où plusieurs chevaliers perdent la vie.
+              </p>
+              <p class="story-paragraph">
+                Marquée par la culpabilité, Dorinthea consacre chaque instant à corriger son indiscipline, affinant sa
+                patience, sa rigueur militaire et sa maestria tactique. Sa rédemption se manifeste lorsqu'elle est
+                choisie par la légendaire épée de lumière Dawnblade, un honneur rarissime qui valide sa valeur morale et
+                sa maîtrise martiale.
+              </p>
+            </div>
+
+            <div class="synthesis-card">
+              <p>
+                Cette chronique décrit le parcours initiatique de Dorinthea, surmontant les erreurs tragiques de son
+                orgueil juvénile pour se muer en lieutenant inflexible de Solana. Sa symbiose physique et spirituelle
+                avec la mythique lame Dawnblade illustre la dévotion et le sacrifice des guerriers de la lumière.
+              </p>
+            </div>
+          </div>
+
+          <div class="hero-media">
+            <img
+              src="assets/prideOfTheIronsongs.png"
+              alt="Illustration Dorinthea - Pride of the Ironsongs"
+              loading="lazy"
+            />
+            <div class="media-overlay"></div>
+            <div class="accent-frame"></div>
+          </div>
+        </section>
+
+        <!-- DASH -->
+        <section class="hero-section dash" id="section-dash" data-category="dash">
+          <div class="hero-info">
+            <div class="badge-group">
+              <span class="badge primary">Metrix</span>
+              <span class="badge">Mechanologist</span>
+              <span class="badge">Inventor</span>
+            </div>
+            <h2 class="hero-name">Dash</h2>
+            <a
+              href="https://fabtcg.com/stories/needle-in-a-haystack/"
+              target="_blank"
+              rel="noopener"
+              class="story-link"
+              title="Lire l'histoire originale sur le site officiel"
+            >
+              Needle in a Haystack
+            </a>
+
+            <div class="hero-description story-content">
+              <p class="story-paragraph">
+                La page « Needle in a Haystack » nous plonge dans les avenues polluées et surchargées de Metrix, une
+                cité-usine à la pointe de la technologie mais gangrénée par la corruption industrielle. Dash, une
+                brillante inventrice et mécanicienne issue des quartiers populaires de Coppertown, passe une nuit à
+                examiner le panorama urbain brumeux depuis un toit suspendu.
+              </p>
+              <p class="story-paragraph">
+                C'est alors qu'elle est rejointe par Ricky, un ami d'enfance spécialisé dans les larcins technologiques.
+                Ce dernier espère la convaincre de pirater et détourner un convoi secret de minerai précieux, le tenatan
+                ore, escorté par les automates armés de la multinationale Cogwerx. Dash applique son esprit logique pour
+                démontrer les probabilités absurdes d'échec de ce plan irréfléchi.
+              </p>
+              <p class="story-paragraph">
+                Malgré le scepticisme de la jeune femme face à l'inconséquence de Ricky et à la surveillance draconienne
+                entourant ce transport, la discussion révèle la combativité et le sens critique de Dash, qui refuse de
+                se courber devant les corporations sans pour autant s'engager dans des plans destructeurs irréfléchis.
+              </p>
+            </div>
+
+            <div class="synthesis-card">
+              <p>
+                L'histoire met en valeur le pragmatisme et l'indépendance de Dash face à la jungle industrielle de
+                Metrix. Rejetant les illusions utopiques comme les complicités criminelles faciles, elle compte sur sa
+                logique, son instinct de survie et ses talents de mécanicienne pour préserver sa liberté dans une
+                mégapole impitoyable.
+              </p>
+            </div>
+          </div>
+
+          <div class="hero-media">
+            <img src="assets/needleInAHaystack.png" alt="Illustration Dash - Needle in a Haystack" loading="lazy" />
+            <div class="media-overlay"></div>
+            <div class="accent-frame"></div>
+          </div>
+        </section>
+
+        <!-- AZALEA -->
+        <section class="hero-section azalea" id="section-azalea" data-category="azalea">
+          <div class="hero-info">
+            <div class="badge-group">
+              <span class="badge primary">The Pits</span>
+              <span class="badge">Ranger</span>
+              <span class="badge">Bounty Hunter</span>
+            </div>
+            <h2 class="hero-name">Azalea</h2>
+            <a
+              href="https://fabtcg.com/stories/a-bird-in-the-hand/"
+              target="_blank"
+              rel="noopener"
+              class="story-link"
+              title="Lire l'histoire originale sur le site officiel"
+            >
+              A Bird in the Hand
+            </a>
+
+            <div class="hero-description story-content">
+              <p class="story-paragraph">
+                La page « A Bird in the Hand » suit Azalea dans ses missions de mercenaire au cœur des Pits, un réseau
+                de cavernes et d'égouts insalubres sous la surface de Rathe servant de refuge à la pire lie criminelle
+                du continent. Tapie dans les recoins obscurs près de la taverne du Blackjack, Azalea étudie froidement
+                ses contrats avec une patience de reptile.
+              </p>
+              <p class="story-paragraph">
+                Dans cet épisode, sa mission consiste à éliminer des marchands de pièces mécaniques illicites et des
+                contrebandiers ayant trahi leurs protecteurs locaux. Sans le moindre remords ni hésitation morale,
+                Azalea traque méthodiquement ses victimes au milieu des galeries toxiques, utilisant ses pièges et des
+                flèches spécialisées pour exécuter ses contrats un après l'autre.
+              </p>
+              <p class="story-paragraph">
+                Son parcours illustre son réalisme extrême : dans un monde souterrain régi par la violence et le chacun
+                pour soi, elle préfère assurer une cible modeste et immédiate plutôt que d'attendre d'hypothétiques
+                jackpots mirobolants, appliquant à la lettre l'adage populaire qui donne son nom au récit.
+              </p>
+            </div>
+
+            <div class="synthesis-card">
+              <p>
+                Cette histoire dessine le portrait d'une tueuse opportuniste et mortellement précise au sein du
+                purgatoire sous-terrain des Pits. Azalea incarne la figure du Ranger dévoyé, où l'acuité visuelle et la
+                maîtrise de l'arc ne servent plus la protection de grands espaces, mais la froide survie mercenaire.
+              </p>
+            </div>
+          </div>
+
+          <div class="hero-media">
+            <img src="assets/aBirdInTheHand.png" alt="Illustration Azalea - A Bird in the Hand" loading="lazy" />
+            <div class="media-overlay"></div>
+            <div class="accent-frame"></div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="wrapper">
+        <p>© 2026 - Chroniques de Rathe. Textes et récits Flesh and Blood.</p>
+      </div>
+    </footer>
+
+    <!-- Interactive Navigation Logic -->
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const tabs = document.querySelectorAll('.tab-btn');
+        const sections = document.querySelectorAll('.hero-section');
+        const glowLeft = document.getElementById('glow-left');
+        const glowRight = document.getElementById('glow-right');
+        const progressBar = document.getElementById('progressBar');
+
+        // Scroll indicator
+        window.addEventListener('scroll', () => {
+          const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+          const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+          const scrolled = (winScroll / height) * 100;
+          progressBar.style.width = scrolled + '%';
+        });
+
+        // Interactive filtering
+        tabs.forEach((tab) => {
+          tab.addEventListener('click', () => {
+            tabs.forEach((t) => t.classList.remove('active'));
+            tab.classList.add('active');
+
+            const targetHero = tab.getAttribute('data-hero');
+
+            // Adjust glow highlights based on active tab
+            const colors = {
+              rhinar: 'var(--rhinar-color)',
+              katsu: 'var(--katsu-color)',
+              bravo: 'var(--bravo-color)',
+              dorinthea: 'var(--dorinthea-color)',
+              dash: 'var(--dash-color)',
+              azalea: 'var(--azalea-color)',
+              all: 'rgba(255, 255, 255, 0.05)',
+            };
+
+            if (targetHero === 'all') {
+              glowLeft.style.background = colors.rhinar;
+              glowRight.style.background = colors.katsu;
+            } else {
+              glowLeft.style.background = colors[targetHero];
+              glowRight.style.background = 'rgba(0,0,0,0)';
+            }
+
+            // Toggle visibility with smooth cards animation
+            sections.forEach((section) => {
+              const sectionHero = section.getAttribute('data-category');
+              if (targetHero === 'all' || targetHero === sectionHero) {
+                section.classList.remove('hidden');
+                setTimeout(() => {
+                  section.style.opacity = '1';
+                  section.style.transform = 'translateY(0)';
+                }, 50);
+              } else {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(15px)';
+                setTimeout(() => {
+                  section.classList.add('hidden');
+                }, 350);
+              }
+            });
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
